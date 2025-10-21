@@ -10,7 +10,6 @@ from '@angular/forms';
 export class EmployeeComponent implements OnInit {
 
    employeeForm: FormGroup;
-   //skillsForm:FormGroup;
    constructor(){
 
    }
