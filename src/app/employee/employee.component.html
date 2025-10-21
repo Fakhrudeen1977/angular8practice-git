@@ -28,7 +28,27 @@
                 </div>
             </div>
 
+             <div class="form-group"  [ngClass]="{'has-error': employeeForm.get('contactPreference').errors 
+            && (employeeForm.get('contactPreference').touched || employeeForm.get('contactPreference').dirty) }" >
+                <label class="col-sm-2 control-label">Contact Preference</label>
+                <div class="col-sm-8">
+                     <input type="radio" value="Email" formControlName="contactPreference" (click)="onContactPreference('Email')">Email &nbsp;&nbsp;
+                     <input type="radio" value="Phone" formControlName="contactPreference"  (click)="onContactPreference('Phone')">Phone &nbsp;&nbsp;
+                     
+                     <span class="help-block" *ngIf="employeeForm.get('contactPreference').errors && (employeeForm.get('contactPreference').touched || employeeForm.get('contactPreference').dirty) ">
+                        
+                    <span *ngIf="employeeForm.get('contactPreference').errors.required"> 
+                   Contact Preference is required
+                </span>
+                    </span>
 
+                     
+                </div>
+            </div>
+
+
+            <div *ngIf=contactPreferenceOption>
+            
             <div class="form-group" [ngClass]="{'has-error': employeeForm.get('email').errors 
             && (employeeForm.get('email').touched || employeeForm.get('email').dirty) }">
                 <label class="col-sm-2 control-label">Email</label>
@@ -44,6 +64,30 @@
 
                 </div>
             </div>
+            </div>
+           
+            <div *ngIf=!contactPreferenceOption>
+           
+             <div class="form-group"  [ngClass]="{'has-error': employeeForm.get('phone').errors 
+            && (employeeForm.get('phone').touched || employeeForm.get('phone').dirty) }" >
+                <label class="col-sm-2 control-label">Phone</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" formControlName="phone">
+                    <span class="help-block" *ngIf="employeeForm.get('phone').errors && (employeeForm.get('phone').touched || employeeForm.get('phone').dirty) ">
+                        
+                    <span *ngIf="employeeForm.get('phone').errors.required"> 
+                    Phone is required
+                </span>
+                    </span>
+
+
+                </div>
+            </div>
+
+          </div>
+           
+            
+          
 
 
             <div formGroupName="skills">
