@@ -1,0 +1,120 @@
+<h3>Reactive Forms in Angular</h3>
+
+<form [formGroup]="employeeForm" (ngSubmit)="save()" class="form-horizontal">
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Create Employee</h3>
+        </div>
+
+        <div class="panel-body">
+            <div class="form-group" [ngClass]="{'has-error': employeeForm.get('fullName').errors 
+            && (employeeForm.get('fullName').touched || employeeForm.get('fullName').dirty) }">
+                <label class="col-sm-2 control-label">Full Name</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" formControlName="fullName">
+
+                    <span class="help-block" *ngIf="employeeForm.get('fullName').errors && (employeeForm.get('fullName').touched || employeeForm.get('fullName').dirty) ">
+                        
+                    <span *ngIf="employeeForm.get('fullName').errors.required"> 
+                    Full Name is required
+                </span>
+
+                <span *ngIf="employeeForm.get('fullName').errors.minlength || employeeForm.get('fullName').errors.maxlength "> 
+                    Full Name muse be greater than 2 characters and less than  25 characters
+                </span>
+                </span>
+
+                </div>
+            </div>
+
+
+            <div class="form-group" [ngClass]="{'has-error': employeeForm.get('email').errors 
+            && (employeeForm.get('email').touched || employeeForm.get('email').dirty) }">
+                <label class="col-sm-2 control-label">Email</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" formControlName="email">
+                    <span class="help-block" *ngIf="employeeForm.get('email').errors && (employeeForm.get('email').touched || employeeForm.get('email').dirty) ">
+                        
+                    <span *ngIf="employeeForm.get('email').errors.required"> 
+                    Email is required
+                </span>
+                    </span>
+
+
+                </div>
+            </div>
+
+
+            <div formGroupName="skills">
+                <div class="form-group" [ngClass]="{'has-error': employeeForm.get('skills.skillName').errors 
+            && (employeeForm.get('skills.skillName').touched || employeeForm.get('skills.skillName').dirty) }">
+                    <label class="col-sm-2 control-label">Skill</label>
+                    <div class="col-sm-8">
+                        <input type="text" formControlName="skillName" placeholder="Name">&nbsp;&nbsp;
+
+                        <span class="help-block" *ngIf="employeeForm.get('skills.skillName').errors && (employeeForm.get('skills.skillName').touched || employeeForm.get('skills.skillName').dirty) ">
+                        
+                    <span  *ngIf="employeeForm.get('skills.skillName').errors.required"> 
+                    Skill is required
+                </span>
+                        </span>
+
+                        <input type="number" min="0" formControlName="experienceInYears" placeholder="Experience in Years">
+                    </div>
+                </div>
+
+                <div class="form-group" [ngClass]="{'has-error': employeeForm.get('skills.experienceInYears').errors 
+            && (employeeForm.get('skills.experienceInYears').touched || employeeForm.get('skills.experienceInYears').dirty) }">
+
+                    <span class="help-block" *ngIf="employeeForm.get('skills.experienceInYears').errors && (employeeForm.get('skills.experienceInYears').touched || employeeForm.get('skills.experienceInYears').dirty) ">
+                        
+                    <span  *ngIf="employeeForm.get('skills.experienceInYears').errors.required"> 
+                    Experience is required
+                </span>
+
+                 <span *ngIf="employeeForm.get('skills.experienceInYears').errors.min"> 
+                    Proficiency must be Zero Year
+                </span>
+
+                 <span *ngIf="employeeForm.get('skills.experienceInYears').errors.max"> 
+                    Proficiency must not greater than  30 Years
+                </span>
+
+
+                    </span>
+                    <label class="col-sm-2 control-label">Proficiency</label>
+                    <div class="col-sm-8" [ngClass]="{'has-error': employeeForm.get('skills.proficiency').errors 
+            && (employeeForm.get('skills.proficiency').touched || employeeForm.get('skills.proficiency').dirty) }">
+                        <input type="radio" value="Beginner" formControlName="proficiency">Beginner &nbsp;&nbsp;
+                        <input type="radio" value="Intermediate" formControlName="proficiency">Intermediate &nbsp;&nbsp;
+                        <input type="radio" value="Advanced" formControlName="proficiency">Advanced
+
+                        <span class="help-block" *ngIf="employeeForm.get('skills.proficiency').errors && (employeeForm.get('skills.proficiency').touched || employeeForm.get('skills.proficiency').dirty) ">
+                        
+                    <span  *ngIf="employeeForm.get('skills.proficiency').errors.required"> 
+                    Proficiency is required
+                </span>
+
+                
+                        </span>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="panel-footer">
+                <button class="btn btn-primary" type="submit" [disabled]="!employeeForm.valid">Save</button>&nbsp;&nbsp;
+                <button class="btn btn-primary" type="button" (click)="reset()">Reset</button>&nbsp;&nbsp;
+                <button class="btn btn-primary" type="button" (click)="loadData()">LoadData</button>
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+</form>
